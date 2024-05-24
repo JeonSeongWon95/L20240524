@@ -11,51 +11,51 @@ struct Array
 
 };
 
+int Number = 0;
+
 Array Member;
 
-void InsertData()
+void InitArray()
 {
-	srand(time(NULL));
+	Member.Address = new int[10];
+	Member.PreAddress = 0;
+	Member.MaxCount = 10;
+	Member.Count = 10;
 
-	int Number = 0;
-	cin >> Number;
-
-	int RandomNumber = rand() % 10;
-	Member.Address[RandomNumber] = Number;
-
-}
-
-void initArray()
-{
 	for (int i = 0; i < Member.MaxCount; ++i)
 	{
 		Member.Address[i] = i + 1;
 	}
+}
 
-	Member.MaxCount = 10;
-	Member.Address = new int[Member.MaxCount];
-	Member.PreAddress = 0;
-	Member.Count = 10;
+void InsertData()
+{
+	cin >> Number;
 
+	srand(time(NULL));
+
+	int RandomNumber = rand() % Member.Count;
+
+	Member.Address[RandomNumber] = Number;
+	Member.PreAddress = Member.Address;
+	Member.Address = new int[Member.MaxCount + 1];
+	Member.MaxCount++;
 }
 
 void Sizeup()
 {
-	Member.PreAddress = Member.Address;
-	Member.Address = new int[Member.MaxCount + 1];
-	Member.MaxCount++;
-	
 	for (int i = 0; i < Member.Count; ++i)
 	{
 		Member.Address[i] = Member.PreAddress[i];
 	}
 
 	delete[] Member.PreAddress;
+
 }
 
 int main()
 {
-	initArray();
+	InitArray();
 	InsertData();
 	Sizeup();
 
