@@ -47,7 +47,7 @@ int main()
 
 	for(int i = 0; i < Member.MaxCount; ++i)
 	{
-		cout << Member.Address[i] << " " << endl;
+		cout << Member.Address[i] << " ";
 	}
 
 	delete[] Member.Address;
