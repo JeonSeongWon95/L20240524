@@ -8,47 +8,62 @@ struct Array
 	int* PreAddress;
 	int Count;
 	int MaxCount;
-
 };
-
-int Number = 0;
 
 Array Member;
 
 void InitArray()
 {
-	Member.Address = new int[10];
 	Member.PreAddress = 0;
 	Member.MaxCount = 10;
 	Member.Count = 10;
-
+	Member.Address = new int[Member.MaxCount];
 	for (int i = 0; i < Member.MaxCount; ++i)
 	{
 		Member.Address[i] = i + 1;
 	}
 }
 
-void InsertData()
+void RandomInsertData()
 {
+	int Number = 0;
+	cout << "숫자를 입력하면 임의의 위치로 추가됩니다." << endl;
 	cin >> Number;
-
 	srand(time(NULL));
 
-	int RandomNumber = rand() % Member.Count;
+	int RandomNumber = rand() % Member.Count + 1;
 
-	Member.Address[RandomNumber] = Number;
 	Member.PreAddress = Member.Address;
-	Member.Address = new int[Member.MaxCount + 1];
-	Member.MaxCount++;
-}
+	Member.Address = new int[Member.MaxCount * 2];
+	Member.MaxCount = Member.MaxCount * 2;
 
-void Sizeup()
-{
-	for (int i = 0; i < Member.Count; ++i)
+	for(int i = 0; i < RandomNumber; ++i )
 	{
 		Member.Address[i] = Member.PreAddress[i];
 	}
 
+	Member.Address[RandomNumber] = Number;
+
+	for (int i = RandomNumber + 1; i < Member.MaxCount; ++i)
+	{
+		Member.Address[i] = Member.PreAddress[i - 1];
+	}
+
+	delete[] Member.PreAddress;
+	Member.PreAddress = nullptr;
+
+}
+
+void Sizeup()
+{
+	Member.PreAddress = Member.Address;
+	Member.MaxCount *= 2;
+	Member.Address = new int[Member.MaxCount];
+
+	for (int i = 0; i < Member.Count; ++i)
+	{
+		Member.Address[i] = Member.PreAddress[i];
+	}
 	delete[] Member.PreAddress;
 
 }
@@ -59,15 +74,13 @@ void PrintArray()
 	{
 		cout << Member.Address[i] << " ";
 	}
-
 	delete[] Member.Address;
-
 }
 
 int main()
 {
 	InitArray();
-	InsertData();
+	RandomInsertData();
 	Sizeup();
 	PrintArray();
 }
