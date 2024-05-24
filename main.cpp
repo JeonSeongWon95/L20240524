@@ -6,6 +6,7 @@ struct Array
 {
 	int* Address;
 	int* PreAddress;
+	int Count;
 	int MaxCount;
 
 };
@@ -19,8 +20,9 @@ int main()
 	Member.Address = new int[10];
 	Member.PreAddress = 0;
 	Member.MaxCount = 10;
+	Member.Count = 10;
 
-	for (int i = 0; i < 10; ++i)
+	for (int i = 0; i < Member.MaxCount; ++i)
 	{
 		Member.Address[i] = i + 1;
 	}
@@ -38,14 +40,14 @@ int main()
 
 	Member.Address[10] = 0;
 
-	for(int i = 0; i < Member.MaxCount - 1; ++i)
+	for(int i = 0; i < Member.Count; ++i)
 	{
 		Member.Address[i] = Member.PreAddress[i];
 	}
 
 	delete[] Member.PreAddress;
 
-	for(int i = 0; i < Member.MaxCount; ++i)
+	for(int i = 0; i < Member.Count; ++i)
 	{
 		cout << Member.Address[i] << " ";
 	}
