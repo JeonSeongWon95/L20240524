@@ -38,8 +38,6 @@ int main()
 	Member.Address = new int[Member.MaxCount + 1];
 	Member.MaxCount++;
 
-	Member.Address[10] = 0;
-
 	for(int i = 0; i < Member.Count; ++i)
 	{
 		Member.Address[i] = Member.PreAddress[i];
