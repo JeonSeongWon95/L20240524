@@ -27,6 +27,11 @@ void InsertData()
 
 void initArray()
 {
+	for (int i = 0; i < Member.MaxCount; ++i)
+	{
+		Member.Address[i] = i + 1;
+	}
+
 	Member.MaxCount = 10;
 	Member.Address = new int[Member.MaxCount];
 	Member.PreAddress = 0;
@@ -39,6 +44,13 @@ void Sizeup()
 	Member.PreAddress = Member.Address;
 	Member.Address = new int[Member.MaxCount + 1];
 	Member.MaxCount++;
+	
+	for (int i = 0; i < Member.Count; ++i)
+	{
+		Member.Address[i] = Member.PreAddress[i];
+	}
+
+	delete[] Member.PreAddress;
 }
 
 int main()
@@ -46,18 +58,6 @@ int main()
 	initArray();
 	InsertData();
 	Sizeup();
-
-	for (int i = 0; i < Member.MaxCount; ++i)
-	{
-		Member.Address[i] = i + 1;
-	}
-
-	for(int i = 0; i < Member.Count; ++i)
-	{
-		Member.Address[i] = Member.PreAddress[i];
-	}
-
-	delete[] Member.PreAddress;
 
 	for(int i = 0; i < Member.Count; ++i)
 	{
