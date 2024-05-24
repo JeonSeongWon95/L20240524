@@ -53,16 +53,21 @@ void Sizeup()
 
 }
 
-int main()
+void PrintArray()
 {
-	InitArray();
-	InsertData();
-	Sizeup();
-
-	for(int i = 0; i < Member.Count; ++i)
+	for (int i = 0; i < Member.Count; ++i)
 	{
 		cout << Member.Address[i] << " ";
 	}
 
 	delete[] Member.Address;
+
+}
+
+int main()
+{
+	InitArray();
+	InsertData();
+	Sizeup();
+	PrintArray();
 }
